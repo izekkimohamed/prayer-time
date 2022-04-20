@@ -1,0 +1,106 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #0e121b;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  color: aliceblue;
+}
+ul {
+  list-style: none;
+  width: min(100%, 300px);
+  display: grid;
+  place-items: center;
+  gap: 0.5rem;
+}
+ul li {
+  width: 100%;
+  display: grid;
+  place-items: center;
+
+  grid-template-columns: 1fr 1fr 1fr;
+}
+ul li span {
+  font-family: "Segoe UI", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+}
+.container {
+  width: 100vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+.circle {
+  width: 400px;
+  height: 400px;
+  position: relative;
+}
+.iftar-name {
+  color: #41abff;
+}
+.next-prayer__name {
+  color: #67f1d8;
+}
+.text {
+  width: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  gap: 1em;
+  text-align: center;
+}
+.text h3 {
+  font-size: clamp(1.5em, 2.5vw, 1.55em);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  padding: 0.2rem;
+}
+svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  position: absolute;
+}
+
+.first {
+  position: relative;
+  stroke-dasharray: 942.096;
+  stroke-dashoffset: 942.096;
+  transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 1, 1);
+  stroke-linecap: round;
+}
+.third {
+  stroke-dasharray: 847.887;
+  stroke-dashoffset: 847.887;
+  transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 1, 1);
+  stroke-linecap: round;
+}
+.second {
+  transition: stroke-dashoffset 1s ease;
+  stroke-linecap: round;
+}
+.date-wrapper {
+  display: grid;
+  place-items: center;
+  gap: 0.5rem;
+}
+.date-wrapper div {
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  gap: 1rem;
+}
