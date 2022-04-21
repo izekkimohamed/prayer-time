@@ -12,28 +12,35 @@ let timings;
 const today = moment().format("DD-MMM-YYYY");
 const tomorrow = moment().add(1, "days").format("DD-MMM-YYYY");
 async function fetchData() {
-  const response = await fetch(
-    `https://api.aladhan.com/v1/timingsByCity/${today}?city=falaise&country=france&method=12`,
-  );
-  const data = await response.json();
-  const todayData = data.data;
+  let city = prompt("Enter your CITY name");
+  let country = prompt("Enter your COUNTRY name");
+  if (city && country) {
+    const [todayTimings, tomorrowTimings] = await Promise.all([
+      fetch(
+        `https://api.aladhan.com/v1/timingsByCity/${today}?city=${city}&country=${country}&method=12`,
+      ),
+      fetch(
+        `https://api.aladhan.com/v1/timingsByCity/${tomorrow}?city=${city}&country=${country}&method=12`,
+      ),
+    ]);
 
-  const nextResponse = await fetch(
-    `https://api.aladhan.com/v1/timingsByCity/${tomorrow}?city=falaise&country=france&method=12`,
-  );
-  const nextData = await nextResponse.json();
-  const tomorrowData = nextData.data;
-
-  const todayTimings = formatPrayers(todayData);
-  const tomorrowTimings = formatPrayers(tomorrowData);
-  timings = {
-    todayTimings,
-    tomorrowTimings,
-  };
-  displayPrayers();
-  showNextPrayer();
-  showIftar();
-  displayDate(timings);
+    const data = await Promise.all([
+      todayTimings.json(),
+      tomorrowTimings.json(),
+    ]);
+    timings = {
+      todayTimings: formatPrayers(data[0].data),
+      tomorrowTimings: formatPrayers(data[1].data),
+    };
+    displayPrayers();
+    displayDate();
+    showNextPrayer();
+    showIftar();
+  } else {
+    alert("Please enter your city and country name");
+    city = prompt("Enter your CITY name");
+    country = prompt("Enter your COUNTRY name");
+  }
 }
 function formatPrayers(data) {
   const prayers = [
