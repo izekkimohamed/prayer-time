@@ -26,11 +26,14 @@ async function fetchData() {
 
   const todayTimings = formatPrayers(todayData);
   const tomorrowTimings = formatPrayers(tomorrowData);
-
-  return {
+  timings = {
     todayTimings,
     tomorrowTimings,
   };
+  displayPrayers();
+  showNextPrayer();
+  showIftar();
+  displayDate(timings);
 }
 function formatPrayers(data) {
   const prayers = [
@@ -66,14 +69,6 @@ function formatPrayers(data) {
     todayDate: date.hijri,
   };
 }
-fetchData().then((data) => {
-  timings = data;
-
-  displayPrayers();
-  showNextPrayer();
-  showIftar();
-  displayDate(timings);
-});
 function displayPrayers() {
   const { todayTimings, tomorrowTimings } = timings;
   const lastPrayer = todayTimings.prayers[todayTimings.prayers.length - 1];
@@ -92,15 +87,13 @@ function displayPrayers() {
 function showNextPrayer() {
   const { todayTimings, tomorrowTimings } = timings;
   let i = 0;
-  const holdTime = 10000 * 1; // 2 minutes
+  const holdTime = 15 * 60 * 1000; // 15 minutes
   const now = moment().format("HH:mm");
   const todayPrayers = todayTimings.prayers.filter(
     (prayer) => prayer.time + holdTime > now,
   );
   const tomorrowPrayers = tomorrowTimings.prayers;
   setInterval(() => {
-    // TODO : set two if statements to check if today or tomorrow
-
     const prayers =
       todayPrayers.length > 0
         ? {
@@ -112,7 +105,7 @@ function showNextPrayer() {
             date: tomorrowTimings.date,
           };
     const nextPrayer = prayers.prayers[i];
-    // console.log(prayers);
+
     const remainingTime = moment().diff(
       moment(`${prayers.date},${nextPrayer.time}`),
     );
@@ -155,7 +148,7 @@ function getRemainingTime(time) {
 
 const showIftar = () => {
   const { date, prayers } = timings.todayTimings;
-  const hold = 10000; // 30 minutes
+  const hold = 30 * 60 * 1000; // 30 minutes
 
   const total = moment(`${date},${prayers[0].time}`).diff(
     moment(`${date},${prayers[4].time}`),
@@ -170,7 +163,7 @@ const showIftar = () => {
 
   const interval = setInterval(() => {
     const remaining = moment().diff(moment(`${date},${prayers[4].time}`));
-    console.log(remaining);
+
     if (remaining > 0 && remaining < hold) {
       iftar.innerHTML = `<h3 class="iftar-name">
       حان وقت الافطار
@@ -204,3 +197,4 @@ function displayDate() {
     time.innerHTML = `<h3> ${currentTime} </h3>`;
   }, 1000);
 }
+fetchData();
