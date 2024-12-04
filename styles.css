@@ -13,6 +13,7 @@ body {
   place-items: center;
   min-height: 100vh;
   color: aliceblue;
+  max-height: 100dvh;
 }
 ul {
   list-style: none;
@@ -101,6 +102,15 @@ svg {
 }
 .date-wrapper div {
   font-family: "Segoe UI", sans-serif;
-  display: flex;
-  gap: 1rem;
+  text-align: center;
+}
+.date {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #c8c8c8;
+}
+.time {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
 }

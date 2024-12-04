@@ -1,6 +1,7 @@
 const circleFirst = document.querySelector(".first");
 const circleThird = document.querySelector(".third");
 const iftar = document.querySelector(".iftar");
+const iftarWrraper = document.querySelector(".iftar-wrapper");
 const prayersList = document.querySelector(".prayers-list");
 const nextPrayerName = document.querySelector(".next-prayer__name");
 const nextPrayerTime = document.querySelector(".next-prayer__time");
@@ -12,8 +13,7 @@ let timings;
 const today = moment().format("DD-MMM-YYYY");
 const tomorrow = moment().add(1, "days").format("DD-MMM-YYYY");
 async function fetchData() {
-  let city = prompt("Enter your CITY name");
-  let country = prompt("Enter your COUNTRY name");
+  const { city, country } = await getIPLocation();
   if (city && country) {
     const [todayTimings, tomorrowTimings] = await Promise.all([
       fetch(
@@ -24,10 +24,11 @@ async function fetchData() {
       ),
     ]);
 
-    const data = await Promise.all([
-      todayTimings.json(),
-      tomorrowTimings.json(),
-    ]);
+    const data = await Promise.all([todayTimings.json(), tomorrowTimings.json()]);
+    console.log(data);
+    const ramadan = data[0].data.date.hijri.month.ar === "Ramadan";
+    console.log(ramadan);
+
     timings = {
       todayTimings: formatPrayers(data[0].data),
       tomorrowTimings: formatPrayers(data[1].data),
@@ -35,7 +36,7 @@ async function fetchData() {
     displayPrayers();
     displayDate();
     showNextPrayer();
-    showIftar();
+    showIftar(ramadan);
   } else {
     alert("Please enter your city and country name");
     city = prompt("Enter your CITY name");
@@ -113,9 +114,7 @@ function showNextPrayer() {
           };
     const nextPrayer = prayers.prayers[i];
 
-    const remainingTime = moment().diff(
-      moment(`${prayers.date},${nextPrayer.time}`),
-    );
+    const remainingTime = moment().diff(moment(`${prayers.date},${nextPrayer.time}`));
     if (remainingTime < 0) {
       nextPrayerTime.innerHTML = getRemainingTime(remainingTime);
       nextPrayerName.innerHTML = nextPrayer.name;
@@ -153,7 +152,11 @@ function getRemainingTime(time) {
   }
 }
 
-const showIftar = () => {
+const showIftar = (ramadan) => {
+  if (!ramadan) {
+    iftarWrraper.style.display = "none";
+    return;
+  }
   const { date, prayers } = timings.todayTimings;
   const hold = 30 * 60 * 1000; // 30 minutes
 
@@ -162,6 +165,7 @@ const showIftar = () => {
   );
   if (moment() < moment(`${date},${prayers[0].time}`)) {
     iftar.innerHTML = "";
+
     circleFirst.style.strokeDashoffset = strokeLengthFirst;
     return;
   }
@@ -188,20 +192,48 @@ const showIftar = () => {
       ${getRemainingTime(remaining)}
       </h3>
       `;
-      circleFirst.style.strokeDashoffset =
-        (strokeLengthFirst * remaining) / total;
+      circleFirst.style.strokeDashoffset = (strokeLengthFirst * remaining) / total;
     }
   }, 1000);
 };
 
 function displayDate() {
   const { day, weekday, month, year } = timings.todayTimings.todayDate;
-  const today = moment().format("ddd MMM YY");
+  const today = moment().format("dddd DD MMMM  YYYY");
   const hijri = `${year} ${weekday.ar} ${day}  ${month.ar}`;
-  date.innerHTML = `<h3>${today}</h3>  <h3>${hijri}</h3> `;
+  date.innerHTML = `<span>${today}</span> <br/> <span>${hijri}</span> `;
   setInterval(() => {
     const currentTime = moment().format("hh:mm:ss");
-    time.innerHTML = `<h3> ${currentTime} </h3>`;
+    time.innerHTML = `<span> ${currentTime} </span>`;
   }, 1000);
 }
 fetchData();
+
+async function getPublicIP() {
+  try {
+    const response = await fetch("https://api.ipify.org?format=json");
+    const data = await response.json();
+    return data.ip;
+  } catch (error) {
+    console.error("Error fetching IP:", error);
+  }
+}
+
+async function getIPLocation() {
+  const ip = await getPublicIP();
+  try {
+    const response = await fetch(`https://ipapi.co/${ip}/json/`);
+    const locationData = await response.json();
+
+    return {
+      city: locationData.city,
+      region: locationData.region,
+      country: locationData.country_name,
+      latitude: locationData.latitude,
+      longitude: locationData.longitude,
+      timezone: locationData.timezone,
+    };
+  } catch (error) {
+    console.error("Error fetching IP location:", error);
+  }
+}
