@@ -104,6 +104,9 @@ svg {
   font-family: "Segoe UI", sans-serif;
   text-align: center;
 }
+.iftar-wrapper {
+  visibility: hidden;
+}
 .date {
   font-size: 1rem;
   font-weight: bold;

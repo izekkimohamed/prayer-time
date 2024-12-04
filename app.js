@@ -154,9 +154,9 @@ function getRemainingTime(time) {
 
 const showIftar = (ramadan) => {
   if (!ramadan) {
-    iftarWrraper.style.display = "none";
     return;
   }
+  iftarWrraper.style.visibility = "visible";
   const { date, prayers } = timings.todayTimings;
   const hold = 30 * 60 * 1000; // 30 minutes
 
