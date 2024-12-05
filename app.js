@@ -27,7 +27,7 @@ async function fetchData() {
     ]);
 
     const data = await Promise.all([todayTimings.json(), tomorrowTimings.json()]);
-    const ramadan = true;
+    const ramadan = data[0].data.date.hijri.month.ar === "رمضان";
 
     timings = {
       todayTimings: formatPrayers(data[0].data),

@@ -43,7 +43,7 @@ ul li span {
   align-items: center;
   gap: 0.5em;
   padding: 1em;
-  background-color: #1a1a1a;
+  background-color: #1d2436;
   border-radius: 0.5em;
   margin-bottom: 1em;
 }
@@ -60,9 +60,9 @@ ul li span {
 .text {
   width: 200px;
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -45%);
   display: grid;
   place-items: center;
   text-align: center;
@@ -75,7 +75,7 @@ ul li span {
 }
 svg {
   transform: rotate(-90deg);
-  translate: -20% -20%;
+  translate: -30% -20%;
   overflow: visible;
 }
 
@@ -109,7 +109,7 @@ svg {
   visibility: hidden;
 }
 .iftar-wrapper {
-  translate: -20% 83%;
+  translate: -30% 83%;
 }
 .date {
   font-size: 1em;
