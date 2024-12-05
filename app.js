@@ -7,6 +7,7 @@ const nextPrayerName = document.querySelector(".next-prayer__name");
 const nextPrayerTime = document.querySelector(".next-prayer__time");
 const date = document.querySelector(".date");
 const time = document.querySelector(".time");
+const cityName = document.querySelector(".city");
 const strokeLengthFirst = circleFirst.getTotalLength();
 const strokeLengthThird = circleThird.getTotalLength();
 let timings;
@@ -14,6 +15,7 @@ const today = moment().format("DD-MMM-YYYY");
 const tomorrow = moment().add(1, "days").format("DD-MMM-YYYY");
 async function fetchData() {
   const { city, country } = await getIPLocation();
+
   if (city && country) {
     const [todayTimings, tomorrowTimings] = await Promise.all([
       fetch(
@@ -25,9 +27,7 @@ async function fetchData() {
     ]);
 
     const data = await Promise.all([todayTimings.json(), tomorrowTimings.json()]);
-    console.log(data);
-    const ramadan = data[0].data.date.hijri.month.ar === "Ramadan";
-    console.log(ramadan);
+    const ramadan = data[0].data.date.hijri.month.ar === "رمضان";
 
     timings = {
       todayTimings: formatPrayers(data[0].data),
@@ -35,6 +35,15 @@ async function fetchData() {
     };
     displayPrayers();
     displayDate();
+    cityName.innerHTML = `
+  <h2>	
+  ${city} -
+  </h2> 
+  <h2>
+  ${country}
+  </h2>
+
+  `;
     showNextPrayer();
     showIftar(ramadan);
   } else {
