@@ -1,75 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Prayer Time" />
-    <meta name="keywords" content="prayer, time, islam, quran, hijri, calendar" />
-    <meta name="author" content="Med" />
-    <link rel="icon" href="./favicon.png" />
-    <title>Prayer Time</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Pryaer Times</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="city"></div>
-      <div class="date-wrapper">
-        <div class="date"></div>
-        <div class="time"></div>
-      </div>
-      <div class="circle">
-        <svg class="time-wrapper iftar-wrapper">
-          <circle
-            cx="200"
-            cy="200"
-            r="155"
-            stroke="#1f2633"
-            stroke-width="12"
-            fill="transparent"
-            class="second"
-          />
-          <circle
-            class="first"
-            cx="200"
-            cy="200"
-            r="155"
-            stroke="#41abff"
-            stroke-width="12"
-            fill="transparent"
-          />
-        </svg>
-        <svg class="time-wrapper">
-          <circle
-            cx="200"
-            cy="200"
-            r="135"
-            stroke="#1f2633"
-            stroke-width="12"
-            fill="transparent"
-            class="second"
-          />
-          <circle
-            class="third"
-            cx="200"
-            cy="200"
-            r="135"
-            stroke="#67f1d8"
-            stroke-width="12"
-            fill="transparent"
-          />
-        </svg>
-        <div class="text">
-          <div class="iftar"></div>
-          <div class="next-prayer">
-            <h3 class="next-prayer__name"></h3>
-            <h3 class="next-prayer__time"></h3>
-          </div>
+    <div class="app">
+      <div class="top-section">
+        <div class="location">
+          <span class="location-icon">◂</span>
+          Mecca, Saudi Arabia
+          <span class="avatar"></span>
+        </div>
+        <div class="time-section">
+          <h1>12:10</h1>
+          <p>Asr less than 3h 6m</p>
+        </div>
+        <div class="mosque-illustration">
+          <div class="dome"></div>
+        </div>
+        <div class="date-section">
+          <div class="date-line"></div>
+          <h2>17 Jumada Al-Awwal 1445</h2>
+          <p>Sat, 01 Dec 2023</p>
         </div>
       </div>
-      <ul class="prayers-list"></ul>
+
+      <div class="prayer-times">
+        <div class="prayer-item">
+          <span class="prayer-icon fajr">
+            <i class="fa-solid fa-person-praying"></i>
+          </span>
+          <span class="prayer-name">Fajr</span>
+          <span class="prayer-time">5:37 am</span>
+          <span class="volume-icon">🔊</span>
+          <i class="fa-solid fa-person-praying"></i>
+        </div>
+        <div class="prayer-item">
+          <span class="prayer-icon sunrise"></span>
+          <span class="prayer-name">Sunrise</span>
+          <span class="prayer-time">6:42 am</span>
+          <span class="volume-icon">🔊</span>
+        </div>
+        <div class="prayer-item">
+          <span class="prayer-icon dhuhr"></span>
+          <span class="prayer-name">Dhuhr</span>
+          <span class="prayer-time">12:10 pm</span>
+          <span class="volume-icon">🔊</span>
+        </div>
+        <div class="prayer-item">
+          <span class="prayer-icon asr"></span>
+          <span class="prayer-name">Asr</span>
+          <span class="prayer-time">3:16 pm</span>
+          <span class="volume-icon">🔊</span>
+        </div>
+        <div class="prayer-item">
+          <span class="prayer-icon maghrib"></span>
+          <span class="prayer-name">Maghrib</span>
+          <span class="prayer-time">5:38 am</span>
+          <span class="volume-icon">🔊</span>
+        </div>
+        <div class="prayer-item">
+          <span class="prayer-icon isha"></span>
+          <span class="prayer-name">Isha'a</span>
+          <span class="prayer-time">6:43 pm</span>
+          <span class="volume-icon">🔊</span>
+        </div>
+      </div>
+
+      <!-- <nav class="bottom-nav">
+        <button class="nav-item active">
+          <span class="nav-icon">🕌</span>
+          <span>Prayer</span>
+        </button>
+        <button class="nav-item">
+          <span class="nav-icon">🧭</span>
+          <span>Qibla</span>
+        </button>
+        <button class="nav-item">
+          <span class="nav-icon">📅</span>
+          <span>Calendar</span>
+        </button>
+        <button class="nav-item">
+          <span class="nav-icon">📖</span>
+          <span>Quran</span>
+        </button>
+        <button class="nav-item">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </button>
+      </nav> -->
     </div>
-    <script src="https://momentjs.com/downloads/moment.js"></script>
-    <script src="app.js"></script>
   </body>
 </html>
