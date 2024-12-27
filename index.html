@@ -4,75 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <title>Pryaer Times</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script src="app.js" defer></script>
   </head>
   <body>
     <div class="app">
       <div class="top-section">
         <div class="location">
-          <span class="location-icon">◂</span>
-          Mecca, Saudi Arabia
-          <span class="avatar"></span>
+          <i class="fas fa-location-arrow"></i>
+          <p class="location-name"></p>
         </div>
         <div class="time-section">
-          <h1>12:10</h1>
-          <p>Asr less than 3h 6m</p>
+          <h1 class="time"></h1>
+          <p class="next-prayer__time"></p>
         </div>
-        <div class="mosque-illustration">
-          <div class="dome"></div>
-        </div>
+
         <div class="date-section">
           <div class="date-line"></div>
-          <h2>17 Jumada Al-Awwal 1445</h2>
-          <p>Sat, 01 Dec 2023</p>
+          <h2 class="date"></h2>
         </div>
       </div>
 
-      <div class="prayer-times">
-        <div class="prayer-item">
-          <span class="prayer-icon fajr">
-            <i class="fa-solid fa-person-praying"></i>
-          </span>
-          <span class="prayer-name">Fajr</span>
-          <span class="prayer-time">5:37 am</span>
-          <span class="volume-icon">🔊</span>
-          <i class="fa-solid fa-person-praying"></i>
-        </div>
-        <div class="prayer-item">
-          <span class="prayer-icon sunrise"></span>
-          <span class="prayer-name">Sunrise</span>
-          <span class="prayer-time">6:42 am</span>
-          <span class="volume-icon">🔊</span>
-        </div>
-        <div class="prayer-item">
-          <span class="prayer-icon dhuhr"></span>
-          <span class="prayer-name">Dhuhr</span>
-          <span class="prayer-time">12:10 pm</span>
-          <span class="volume-icon">🔊</span>
-        </div>
-        <div class="prayer-item">
-          <span class="prayer-icon asr"></span>
-          <span class="prayer-name">Asr</span>
-          <span class="prayer-time">3:16 pm</span>
-          <span class="volume-icon">🔊</span>
-        </div>
-        <div class="prayer-item">
-          <span class="prayer-icon maghrib"></span>
-          <span class="prayer-name">Maghrib</span>
-          <span class="prayer-time">5:38 am</span>
-          <span class="volume-icon">🔊</span>
-        </div>
-        <div class="prayer-item">
-          <span class="prayer-icon isha"></span>
-          <span class="prayer-name">Isha'a</span>
-          <span class="prayer-time">6:43 pm</span>
-          <span class="volume-icon">🔊</span>
-        </div>
-      </div>
+      <div class="prayer-times"></div>
 
       <!-- <nav class="bottom-nav">
         <button class="nav-item active">
